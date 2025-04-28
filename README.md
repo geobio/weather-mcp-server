@@ -1,5 +1,7 @@
 # Weather MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@devilcoder01/weather-mcp-server)](https://smithery.ai/server/@devilcoder01/weather-mcp-server)
+
 A Model Context Protocol (MCP) server for weather data, built with FastAPI and the MCP framework. This server provides various weather-related tools that can be used by AI assistants to retrieve current weather conditions, forecasts, air quality data, and more.
 
 ## Features
@@ -22,6 +24,15 @@ A Model Context Protocol (MCP) server for weather data, built with FastAPI and t
 
 ## Installation
 
+### Installing via Smithery
+
+To install Weather Data Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@devilcoder01/weather-mcp-server):
+
+```bash
+npx -y @smithery/cli install @devilcoder01/weather-mcp-server --client claude
+```
+
+### Manual Installation
 1. Clone this repository:
    ```
    git clone https://github.com/yourusername/Weather_mcp_server.git
