@@ -18,5 +18,7 @@ COPY . .
 # Expose MCP port
 EXPOSE 8000
 
+RUN echo "foo"
+
 # Start the MCP server
-CMD ["python", "main.py"]
+ENTRYPOINT ["python", "main.py"]
