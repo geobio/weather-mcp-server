@@ -15,8 +15,8 @@ WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 logger = logging.getLogger("WeatherMCP")
 
-# Create an MCP server named "AdvancedWeather"
-mcp = FastMCP(name="WeatherMCP",prompt="This is a Weather server. You can get current weather, forecast, air quality, and astronomy information by calling the available tools.")
+# Create an MCP server named "WeatherMCP"
+mcp = FastMCP(name="WeatherMCP", host="0.0.0.0", prompt="This is a Weather server. You can get current weather, forecast, air quality, and astronomy information by calling the available tools.")
 
 # Helper: call WeatherAPI asynchronously
 def validate_date(dt_str: str) -> None:
@@ -200,5 +200,5 @@ async def weather_sports(q: str) -> dict:
 
 # Run the MCP server
 if __name__ == "__main__":
-    # This starts a Server-Sent Events (SSE) endpoint on port 8000
-    mcp.run()
+    # This starts a streamable http mcp server endpoint on port 8000
+    mcp.run(transport="streamable-http")
