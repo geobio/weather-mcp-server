@@ -6,6 +6,8 @@ from fastapi import HTTPException
 from datetime import datetime
 import uvicorn
 import logging
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 # Load environment variables from .env file
 load_dotenv()
@@ -197,6 +199,12 @@ async def weather_sports(q: str) -> dict:
     if not q:
         raise HTTPException(status_code=400, detail="Location (q) is required.")
     return await fetch("sports.json", {"q": q})
+
+
+@mcp.custom_route("/health", methods=["GET"])
+async def health(request: Request) -> JSONResponse:
+    """Returns the health status of the server."""
+    return JSONResponse({"status": "healthy"})
 
 # Run the MCP server
 if __name__ == "__main__":
