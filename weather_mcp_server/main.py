@@ -48,11 +48,20 @@ async def fetch(endpoint: str, params: dict) -> dict:
             try:
                 data = resp.json()
             except Exception:
-                data = None
+                # If JSON parsing fails, raise an error
+                logger.error(f"Failed to parse JSON response from {url}")
+                raise HTTPException(status_code=500, detail="Invalid JSON response from weather API")
+            
             if resp.status_code != 200:
                 detail = (data or {}).get("error", {}).get("message", resp.text)
                 logger.error(f"WeatherAPI error {resp.status_code}: {detail}")
                 raise HTTPException(status_code=resp.status_code, detail=detail)
+            
+            # Ensure we have valid data before returning
+            if data is None:
+                logger.error(f"Received null data from {url}")
+                raise HTTPException(status_code=500, detail="Received null data from weather API")
+                
             logger.info(f"WeatherAPI success: {url}")
             return data
         except httpx.RequestError as e:
@@ -199,6 +208,11 @@ async def weather_sports(q: str) -> dict:
     return await fetch("sports.json", {"q": q})
 
 # Run the MCP server
-if __name__ == "__main__":
+def main():
+    """Entry point for the weather MCP server."""
+    logger.info(f"Starting weather-mcp-server (aka weather-data)")
     # This starts a Server-Sent Events (SSE) endpoint on port 8000
     mcp.run()
+
+if __name__ == "__main__":
+    main()

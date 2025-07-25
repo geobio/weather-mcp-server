@@ -1,11 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "weather-mcp-server"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Model Context Protocol server for weather data using WeatherAPI"
 readme = "README.md"
 requires-python = ">=3.13"
+authors = [
+    {name = "Weather MCP Server Contributors"},
+]
 dependencies = [
     "fastapi-mcp>=0.3.3",
     "httpx>=0.28.1",
     "mcp[cli]>=1.9.4",
+    "python-dotenv>=1.0.0",
+    "uvicorn>=0.30.0",
 ]
+
+[project.scripts]
+weather-mcp-server = "weather_mcp_server.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["weather_mcp_server"]
