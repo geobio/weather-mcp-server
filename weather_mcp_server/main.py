@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger("WeatherMCP")
 
 # Create an MCP server named "AdvancedWeather"
-mcp = FastMCP(name="WeatherMCP",prompt="This is a Weather server. You can get current weather, forecast, air quality, and astronomy information by calling the available tools.")
+mcp = FastMCP(name="WeatherMCP")
 
 # Helper: call WeatherAPI asynchronously
 def validate_date(dt_str: str) -> None:
